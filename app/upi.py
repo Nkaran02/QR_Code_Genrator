@@ -26,3 +26,17 @@ def create_qr_code(upi_uri:str) -> bytes:
         border=4,   
     )
 
+    qr.add_data(upi_uri)
+    qr.make(fit=True)
+
+    image = qr.make_image()
+
+    from io import BytesIO
+
+    buffer = BytesIO()
+    image.save(buffer, format="PNG")
+
+    return buffer.getvalue()
+
+
+
